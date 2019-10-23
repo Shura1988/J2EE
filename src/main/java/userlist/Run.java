@@ -16,11 +16,8 @@ public class Run {
 
             @Override
             public void show(String login, Object model) {
-
             }
-
         };
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("Выберите опрецию ктоорую хотите произвести:\n" +
                 "1. добавить юзера\n" +
@@ -41,6 +38,7 @@ public class Run {
                 user.enter();
                 break;
         }
+        scanner.close();
     }
 }
 

@@ -13,9 +13,7 @@ public abstract class BaseDaoImpl implements BaseDao {
     Connect connection = new Connect();
     Scanner scanner = new Scanner(System.in);
 
-
     public void add() throws SQLException {
-
         String str2 = "INSERT INTO user (login, password, age, gender, firstName, lastName, description) VALUES (?, ?, ?, ?, ?, ?, ?)";
         Statement st = connection.getConnection().createStatement();
         PreparedStatement ps1 = connection.getConnection().prepareStatement(str2);
@@ -56,9 +54,7 @@ public abstract class BaseDaoImpl implements BaseDao {
         ps1.executeUpdate();
         System.out.println("User добавлен");
 
-
     }
-
 
     public void show() throws SQLException {
         Statement statement = connection.getConnection().createStatement();
@@ -102,7 +98,7 @@ public abstract class BaseDaoImpl implements BaseDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        scanner.close();
     }
 
 }
-
