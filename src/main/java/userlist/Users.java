@@ -14,7 +14,7 @@ public class Users {
 
     public Users(String login, String password) {
         this.login = login;
-        this.password =password;
+        this.password = password;
     }
 
     public Users() {
@@ -81,7 +81,7 @@ public class Users {
     public String toString() {
         return "User{" +
                 "login='" + login + '\'' +
-                ", passvord='" +password + '\'' +
+                ", passvord='" + password + '\'' +
                 ", age=" + age +
                 ", gender=" + gender +
                 ", firstName='" + firstName + '\'' +
@@ -108,8 +108,6 @@ public class Users {
     public int hashCode() {
         return Objects.hash(login, password, age, gender, firstName, lastName, deskcription);
     }
-
-
 
 
 }

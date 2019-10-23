@@ -13,45 +13,6 @@ public abstract class BaseDaoImpl implements BaseDao {
     Connect connection = new Connect();
     Scanner scanner = new Scanner(System.in);
 
-    public BaseDaoImpl() {
-    }
-
-    public void addUser() throws SQLException {
-
-        String str1 = "INSERT INTO user (login, passvord, age, gender, firstName, lastName, description) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement ps = connection.getConnection().prepareStatement(str1);
-        System.out.println("Введите логин:  ");
-        String login = scanner.next();
-        ps.setString(1, login);
-        System.out.println("Введите пароль:  ");
-        String password = scanner.next();
-        ps.setString(2, password);
-        System.out.println("Введите возраст:  ");
-        int age = scanner.nextInt();
-        if (age < 0) {
-            System.out.println("Неправильно указан возраст");
-            System.out.println("Введите возраст");
-            age = scanner.nextInt();
-        } else {
-            age = age;
-        }
-        ps.setInt(3, age);
-        System.out.println("Введите пол:  ");
-        String gender = scanner.next();
-        ps.setString(4, gender);
-        System.out.println("Введите firstName:  ");
-        String firstName = scanner.next();
-        ps.setString(5, firstName);
-        System.out.println("Введите lastName:  ");
-        String lastName = scanner.next();
-        ps.setString(6, lastName);
-        System.out.println("Введите иформацию о себе:  ");
-        String description = scanner.next();
-        ps.setString(7, description);
-        ps.executeUpdate();
-        System.out.println("User добавлен");
-        return;
-    }
 
     public void add() throws SQLException {
 

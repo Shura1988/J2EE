@@ -10,5 +10,7 @@ public interface BaseDao<T> {
 
     void show(String login, T model) throws SQLException;
 
+    void enter();
+
 
 }
