@@ -7,16 +7,13 @@ import java.util.Scanner;
 
 
 public class Run extends BaseDaoImpl {
-    protected Run() throws SQLException {
-    }
-
     public void start() throws SQLException {
         BaseDaoImpl user = new BaseDaoImpl() {
         };
         Scanner scanner = new Scanner(System.in);
         System.out.println("Выберите опрецию ктоорую хотите произвести:\n" +
                 "1. добавить юзера\n" +
-                "2. вывести список юзеров\n" +
+                "2. показать юзера\n" +
                 "3. войти в аккаунт ");
         int number = scanner.nextInt();
         switch (number) {
@@ -24,11 +21,11 @@ public class Run extends BaseDaoImpl {
                 user.add();
                 break;
             case 2:
-                System.out.println("таблица users");
+                System.out.println("показать юзера по полю login");
                 user.show();
                 break;
             case 3:
-                System.out.println(" Вы в системе ");
+                System.out.println(" Вы в системе нажмите ввод");
                 user.enter();
                 break;
         }

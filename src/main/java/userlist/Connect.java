@@ -1,9 +1,13 @@
 package userlist;
 
+import Dao.BaseDao;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.Properties;
 
 public class Connect {
 
@@ -11,7 +15,6 @@ public class Connect {
     private final String username = "root";
     private final String password = "SCN932hdu";
     private Connection connect;
-
 
     public Connect() {
         try {
@@ -31,6 +34,8 @@ public class Connect {
     }
 
 }
+
+
 
 
 

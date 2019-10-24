@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public abstract class BaseDaoImpl implements BaseDao {
+public abstract class BaseDaoImpl extends Connect implements BaseDao {
 
     Connect connection = new Connect();
     Statement st;
     {
         try {
-           st = connection.getConnection().createStatement();
+            st = connection.getConnection().createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -88,7 +88,9 @@ public abstract class BaseDaoImpl implements BaseDao {
     @Override
     public void show() throws SQLException {
         Scanner scanner = new Scanner(System.in);
-        String str = "SELECT * from User";
+        System.out.println("Введите логин");
+        String login = scanner.nextLine();
+        String str = "select * from user where login ='" + login + "';";
         ResultSet rs1 = st.executeQuery(str);
         while (rs1.next()) {
             List<Users> users = new ArrayList<>();
