@@ -7,7 +7,7 @@ public class Users {
     private String login;
     private String password;
     private int age;
-    private String gender;
+    private Enum sex;
     private String firstName;
     private String lastName;
     private String deskcription;
@@ -33,8 +33,8 @@ public class Users {
         return password;
     }
 
-    public void setPassword(String passvord) {
-        this.password = passvord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getAge() {
@@ -45,12 +45,12 @@ public class Users {
         this.age = age;
     }
 
-    public String getGender() {
-        return gender;
+    public Enum getSex() {
+        return sex;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setSex(Enum sex) {
+        this.sex = sex;
     }
 
     public String getFirstName() {
@@ -69,7 +69,7 @@ public class Users {
         this.lastName = lastName;
     }
 
-    public String getDeskcription(String description) {
+    public String getDeskcription() {
         return deskcription;
     }
 
@@ -78,38 +78,34 @@ public class Users {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Users users = (Users) o;
+        return age == users.age &&
+                login.equals(users.login) &&
+                password.equals(users.password) &&
+                sex.equals(users.sex) &&
+                firstName.equals(users.firstName) &&
+                lastName.equals(users.lastName) &&
+                deskcription.equals(users.deskcription);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(login, password, age, sex, firstName, lastName, deskcription);
+    }
+
+    @Override
     public String toString() {
-        return "User{" +
+        return "Users{" +
                 "login='" + login + '\'' +
-                ", passvord='" + password + '\'' +
+                ", password='" + password + '\'' +
                 ", age=" + age +
-                ", gender=" + gender +
+                ", sex=" + sex +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", deskcription='" + deskcription + '\'' +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Users user = (Users) o;
-        return age == user.age &&
-                Objects.equals(login, user.login) &&
-                Objects.equals(password, user.password) &&
-                gender == user.gender &&
-                Objects.equals(firstName, user.firstName) &&
-                Objects.equals(lastName, user.lastName) &&
-                Objects.equals(deskcription, user.deskcription);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(login, password, age, gender, firstName, lastName, deskcription);
-    }
-
-
 }
-
-

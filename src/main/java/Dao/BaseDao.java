@@ -4,13 +4,12 @@ package Dao;
 import java.sql.SQLException;
 
 
-public interface BaseDao<T> {
+public interface BaseDao {
 
-    void add(T model) throws SQLException;
+    void add() throws SQLException;
 
-    void show(String login, T model) throws SQLException;
+    void show() throws SQLException;
 
-    void enter();
-
+    void enter() throws SQLException;
 
 }
