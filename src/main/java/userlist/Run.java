@@ -1,13 +1,14 @@
 package userlist;
 
-import Dao.impl.BaseDaoImpl;
 
+
+import Dao.impl.BaseDaoImpl;
 import java.sql.SQLException;
 import java.util.Scanner;
 
 
-public class Run extends BaseDaoImpl {
-    public void start() throws SQLException {
+public class Run {
+    public void start() throws SQLException{
         BaseDaoImpl user = new BaseDaoImpl() {
         };
         Scanner scanner = new Scanner(System.in);
@@ -33,8 +34,8 @@ public class Run extends BaseDaoImpl {
     }
 
 
-    public static void main(String[] args) throws SQLException {
-        Run one = new Run();
+    public static void main(String[] args) throws SQLException{
+       Run one = new Run();
         one.start();
     }
 }
