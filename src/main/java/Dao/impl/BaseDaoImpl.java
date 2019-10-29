@@ -1,18 +1,21 @@
 package Dao.impl;
 
 import Dao.BaseDao;
-import userlist.Connect;
-import userlist.Sex;
-import userlist.Users;
+import userlist.*;
+
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public abstract class BaseDaoImpl extends Connect implements BaseDao {
+    SqlProperties sql = new SqlProperties();
+    String str = "";
 
     Connect connect = new Connect();
     Statement st;
+
     {
         try {
             st = connect.getConnection().createStatement();
@@ -20,12 +23,13 @@ public abstract class BaseDaoImpl extends Connect implements BaseDao {
             e.printStackTrace();
         }
     }
-    @Override
-    public void add() throws SQLException {
 
+    @Override
+    public void add() throws SQLException, IOException {
         Scanner scanner = new Scanner(System.in);
-        String str2 = "INSERT INTO user (login, password, age, sex, firstName, lastName, description) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement ps1 = getConnection().prepareStatement(str2);
+        str = sql.sqlProp("str2");
+        //str = "INSERT INTO user (login, password, age, sex, firstName, lastName, description) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps1 = getConnection().prepareStatement(str);
         System.out.println("Введите логин:  ");
         String login = scanner.next();
         boolean flag = true;
@@ -44,7 +48,7 @@ public abstract class BaseDaoImpl extends Connect implements BaseDao {
         ps1.setString(2, password);
         System.out.println("Введите возраст:  ");
         int age = scanner.nextInt();
-        if (age < 0) {
+        if (age < 0 | age > 120) {
             System.out.println("Неправильно указан возраст");
             System.out.println("Введите возраст");
             age = scanner.nextInt();
@@ -52,15 +56,19 @@ public abstract class BaseDaoImpl extends Connect implements BaseDao {
             age = age;
         }
         ps1.setInt(3, age);
-        System.out.println("Введите пол:  ");
-        System.out.println(" 1 - man;\n 2 - woman");
+        System.out.println("Введите пол:\n" +
+                "1 - man;\n" +
+                "2 - woman");
         int sex = scanner.nextInt();
-        if (sex == 1) {
-            ps1.setString(1, String.valueOf(sex));
-        } else if (sex == 2) {
-            ps1.setString(2, String.valueOf(sex));
-        } else {
-            System.out.println("Некорректное значение");
+        while (flag) {
+            if (sex == 1) {
+                ps1.setInt(1, sex);
+            } else if (sex == 2) {
+                ps1.setInt(2, sex);
+            } else {
+                System.out.println("Некорректное значение");
+                flag = false;
+            }
         }
         ps1.setInt(4, sex);
         System.out.println("Введите firstName:  ");
@@ -72,6 +80,7 @@ public abstract class BaseDaoImpl extends Connect implements BaseDao {
         System.out.println("Введите иформацию о себе:  ");
         String description = scanner.next();
         ps1.setString(7, description);
+        System.out.println(ps1);
         ps1.executeUpdate();
         System.out.println("User добавлен");
         scanner.close();
@@ -83,7 +92,8 @@ public abstract class BaseDaoImpl extends Connect implements BaseDao {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите логин");
         String login = scanner.nextLine();
-        String str = "select * from user where login ='" + login + "';";
+        // str = sql.sqlProp("str");
+        str = "select * from user where login ='" + login + "';";
         ResultSet rs1 = st.executeQuery(str);
         while (rs1.next()) {
             List<Users> users = new ArrayList<>();
@@ -97,12 +107,13 @@ public abstract class BaseDaoImpl extends Connect implements BaseDao {
             user.setDeskcription(rs1.getString("description"));
             users.add(user);
             System.out.println(users);
+
         }
-        scanner.close();
         st.close();
+        scanner.close();
     }
 
-    @Override
+
     public void enter() {
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
@@ -111,8 +122,9 @@ public abstract class BaseDaoImpl extends Connect implements BaseDao {
         System.out.println("Введите пароль");
         String password = scanner.nextLine();
         try {
-            String query = "select * from user where login ='" + login + "' and password ='" + password + "';";
-            if (st.executeQuery(query).first()) {
+            // str = sql.sqlProp("query");
+            str = "select * from user where login ='" + login + "' and password ='" + password + "';";
+            if (st.executeQuery(str).first()) {
                 System.out.println("Добро пожаловать");
 
                 System.out.println("1. Инфо");
@@ -130,3 +142,5 @@ public abstract class BaseDaoImpl extends Connect implements BaseDao {
     }
 
 }
+
+

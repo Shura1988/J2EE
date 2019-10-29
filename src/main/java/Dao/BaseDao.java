@@ -11,6 +11,7 @@ public interface BaseDao {
 
     void show() throws SQLException;
 
-    void enter() throws SQLException;
+    void enter() throws SQLException, IOException;
+
 
 }

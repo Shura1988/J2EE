@@ -1,22 +1,19 @@
 package userlist;
 
 
-import Dao.impl.BaseDaoImpl;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
-import java.util.Scanner;
+import java.util.TreeMap;
 
 public class Connect {
     private static final String url = new Connect().getProperty("url");
     private static final String username = new Connect().getProperty("username");
     private static final String password = new Connect().getProperty("password");
     Connection connection;
+
     public Connection getConnection() {
         try {
             connection = DriverManager.getConnection(url, username, password);
@@ -25,12 +22,13 @@ public class Connect {
         }
         return connection;
     }
+
     public String getProperty(String propertyName) {
         Properties properties = new Properties();
         String property = "";
         try (InputStream is = this.getClass().getResourceAsStream("/config.properties")) {
             properties.load(is);
-             property = properties.getProperty(propertyName);
+            property = properties.getProperty(propertyName);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,6 +36,10 @@ public class Connect {
     }
 
 }
+
+
+
+
 
 
 
